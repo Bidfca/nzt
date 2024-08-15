@@ -1,0 +1,129 @@
+<div class="flex justify-center">
+  <img src="../assets/logo.png" alt="logo" class="w-28 sm:w-40" />
+</div>
+<div class="bg-primary mb-6 flex flex-wrap justify-center">
+  <a class="btn btn-ghost text-white" (click)="goTo('creatines')">CREATINAS</a>
+  <a class="btn btn-ghost text-white" (click)="goTo('wheys')">WHEY PROTEIN</a>
+  <a class="btn btn-ghost text-white" (click)="goTo('pre-workouts')"
+    >PRÉ TREINOS</a
+  >
+  <a class="btn btn-ghost text-white" (click)="goTo('thermogenics')"
+    >TERMOGÊNICOS</a
+  >
+  <a class="btn btn-ghost text-white" (click)="goTo('hypercalorics')"
+    >HIPERCALÓRICOS</a
+  >
+  <a class="btn btn-ghost text-white" (click)="goTo('stimulants')"
+    >ESTIMULANTES</a
+  >
+  <!-- <a class="btn btn-ghost text-white">BARRA DE PROTEÍNA</a>
+  <a class="btn btn-ghost text-white">PASTA DE AMEINDOIM</a>
+  <a class="btn btn-ghost text-white">BCAA</a>
+  <a class="btn btn-ghost text-white">GLUTAMINA</a>
+  <a class="btn btn-ghost text-white">CEFEÍNA</a>
+  <a class="btn btn-ghost text-white">COQUETELEIRAS</a>
+  <a class="btn btn-ghost text-white">SALGADINHO PROTEÍCO</a>
+  <a class="btn btn-ghost text-white">SHAKE DE WHEY PROTEIN</a>
+  <a class="btn btn-ghost text-white">ACESSORIOS</a>
+  <a class="btn btn-ghost text-white">IMPORTADOS</a> -->
+</div>
+<div class="flex items-center flex-col mx-10 gap-10">
+  <label class="input input-bordered flex items-center gap-2 w-full max-w-7xl">
+    <input
+      type="text"
+      class="grow"
+      placeholder="Procurar"
+      (input)="onSearchChange($event)"
+    />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      class="h-4 w-4 opacity-70"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  </label>
+  @if(filteredProducts) {
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl gap-6">
+    @for (product of filteredProducts; track $index) {
+    <div class="card bg-base-100 w-full shadow-xl">
+      <figure style="background-image: url('../assets/logo-neutral.png')">
+        <img [src]="product.img" [alt]="product.name" class="h-40 my-6" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{{ product.name }}</h2>
+        <p>{{ getFormattedPrice(product.price) }}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-secondary text-white">COMPRAR</button>
+        </div>
+      </div>
+    </div>
+    } @empty {
+    <p class="text-3xl sm:col-span-2 lg:col-span-3 text-center">
+      NENHUM PRODUTO ENCONTRADO!
+    </p>
+    }
+  </div>
+  } @else {
+  <h1 class="text-3xl" id="pre-workouts">PRÉ TREINOS</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl gap-6">
+    @for (preWorkout of preWorkouts; track $index) {
+    <div class="card bg-base-100 w-full shadow-xl">
+      <figure style="background-image: url('../assets/logo-neutral.png')">
+        <img [src]="preWorkout.img" [alt]="preWorkout.name" class="h-40 my-6" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{{ preWorkout.name }}</h2>
+        <p>{{ getFormattedPrice(preWorkout.price) }}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-secondary text-white">COMPRAR</button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <h1 class="text-3xl" id="thermogenics">TERMOGÊNICOS</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl gap-6">
+    @for (thermogenic of thermogenics; track $index) {
+    <div class="card bg-base-100 w-full shadow-xl">
+      <figure style="background-image: url('../assets/logo-neutral.png')">
+        <img
+          [src]="thermogenic.img"
+          [alt]="thermogenic.name"
+          class="h-40 my-6"
+        />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{{ thermogenic.name }}</h2>
+        <p>{{ getFormattedPrice(thermogenic.price) }}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-secondary text-white">COMPRAR</button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <h1 class="text-3xl" id="creatines">CREATINAS</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl gap-6">
+    @for (creatine of creatines; track $index) {
+    <div class="card bg-base-100 w-full shadow-xl">
+      <figure style="background-image: url('../assets/logo-neutral.png')">
+        <img [src]="creatine.img" [alt]="creatine.name" class="h-40 my-6" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{{ creatine.name }}</h2>
+        <p>{{ getFormattedPrice(creatine.price) }}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-secondary text-white">COMPRAR</button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>
