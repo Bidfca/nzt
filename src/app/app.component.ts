@@ -1,6 +1,20 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { BehaviorSubject, debounceTime } from 'rxjs';
+import { preWorkouts } from './categorias/pre-treinos';
+import { thermogenics } from './categorias/termogenicos';
+import { creatines } from './categorias/creatinas';
+import { wheys } from './categorias/wheys';
+import { hypercalorics } from './categorias/hipercaloricos';
+import { stimulants } from './categorias/estimulantes';
+import { proteinBars } from './categorias/barras-de-proteina';
+import { accessories } from './categorias/acessorios';
+import { bcaas } from './categorias/bcaas';
+import { caffeines } from './categorias/cafeinas';
+import { shakers } from './categorias/coqueteleiras';
+import { glutamines } from './categorias/glutaminas';
+import { imported } from './categorias/importados';
+import { peanutButters } from './categorias/pastas-de-amendoin';
 
 @Component({
   selector: 'app-root',
@@ -14,15 +28,41 @@ export class AppComponent {
   filteredProducts: any[] | null = null;
   search$: BehaviorSubject<string> = new BehaviorSubject('');
 
+  perCategory = [
+    preWorkouts,
+    thermogenics,
+    creatines,
+    wheys,
+    hypercalorics,
+    peanutButters,
+    stimulants,
+    proteinBars,
+    bcaas,
+    glutamines,
+    caffeines,
+    shakers,
+    accessories,
+    imported,
+  ];
+
   ngOnInit() {
     this.search$.pipe(debounceTime(600)).subscribe((searchTerm) => {
       this.filteredProducts = searchTerm
         ? [
-            ...this.preWorkouts,
-            ...this.thermogenics,
-            ...this.creatines,
-            ...this.wheys,
-            ...this.hypercalorics,
+            ...preWorkouts.produtos,
+            ...thermogenics.produtos,
+            ...creatines.produtos,
+            ...wheys.produtos,
+            ...hypercalorics.produtos,
+            ...peanutButters.produtos,
+            ...stimulants.produtos,
+            ...proteinBars.produtos,
+            ...bcaas.produtos,
+            ...glutamines.produtos,
+            ...caffeines.produtos,
+            ...shakers.produtos,
+            ...accessories.produtos,
+            ...imported.produtos,
           ].filter(({ name }) =>
             name.toLowerCase().includes(searchTerm.toLowerCase())
           )
@@ -48,118 +88,4 @@ export class AppComponent {
       maximumFractionDigits: 2,
     }).format(price);
   }
-
-  preWorkouts = [
-    {
-      img: '../assets/psycho-killer.png',
-      name: 'PSYCHO KILLER 294g - Demons Lab',
-      price: 147,
-      description: '',
-    },
-    {
-      img: '../assets/horus-150.png',
-      name: 'HÓRUS 150g - MAX TITANIUM',
-      price: 77,
-      description: '',
-    },
-    {
-      img: '../assets/evora-pw-150.png',
-      name: 'ÉVORA PW 150g - DARKNESS',
-      price: 77,
-      description: '',
-    },
-  ];
-
-  thermogenics = [
-    {
-      img: '../assets/lipodrene.png',
-      name: 'LIP0DR3NE',
-      price: 239,
-      description: '',
-    },
-    {
-      img: '../assets/black-viper.png',
-      name: 'Black Viper - 90cps - Importado - Dragon Pharma',
-      price: 229,
-      description: '',
-    },
-    {
-      img: '../assets/lipo-6.png',
-      name: 'Termogênico Importado LIPO 6 - Nutrex',
-      price: 187,
-      description: '',
-    },
-  ];
-
-  creatines = [
-    {
-      img: '../assets/creatina-hardcore-300.png',
-      name: 'CREATINA HARDCORE 300g - INTEGRALMEDICA',
-      price: 97,
-      description: '',
-    },
-    {
-      img: '../assets/crealkaline.png',
-      name: 'Creatina IMPORTADA Crealkaline 300g - Demons Lab',
-      price: 97,
-      description: '',
-    },
-    {
-      img: '../assets/creatina-probiotica-300.png',
-      name: 'Creatina MonoHidratada - Probiotica 300g',
-      price: 89,
-      description: '',
-    },
-  ];
-
-  wheys = [
-    {
-      img: '../assets/whey-integral-900-refil.png',
-      name: 'Whey Protein 100% pure - Integralmedica 900g refil',
-      price: 97,
-      description: '',
-    },
-    {
-      img: '../assets/whey-isolado-max-pote.png',
-      name: 'Whey Protein ISOLADO - Max Titanium POTE',
-      price: 167,
-      description: '',
-    },
-    {
-      img: '../assets/whey-probiotica-900.png',
-      name: 'Whey protein',
-      price: 95,
-      description: '',
-    },
-  ];
-
-  hypercalorics = [
-    {
-      img: '../assets/massa-nitro.png',
-      name: 'HIPERCALÓRICO MASSA NITRO 2,52kg - PROBIOTICA',
-      price: 87,
-      description: '',
-    },
-    {
-      img: '../assets/massa-nitro.png',
-      name: 'HIPERCALÓRICO MASSA NITRO 2,52kg - PROBIOTICA',
-      price: 87,
-      description: '',
-    },
-    {
-      img: '../assets/massa-nitro.png',
-      name: 'HIPERCALÓRICO MASSA NITRO 2,52kg - PROBIOTICA',
-      price: 87,
-      description: '',
-    },
-  ];
-
-  imported = [
-    {
-      img: '../assets/plasma-jet.png',
-      name: 'Creatina + Beta alanina Importada 200g',
-      price: 77,
-      description: '',
-    },
-  ];
 }

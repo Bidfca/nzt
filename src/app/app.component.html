@@ -2,29 +2,31 @@
   <img src="../assets/logo.png" alt="logo" class="w-28 sm:w-40" />
 </div>
 <div class="bg-primary mb-6 flex flex-wrap justify-center">
-  <a class="btn btn-ghost text-white" (click)="goTo('creatines')">CREATINAS</a>
-  <a class="btn btn-ghost text-white" (click)="goTo('wheys')">WHEY PROTEIN</a>
-  <a class="btn btn-ghost text-white" (click)="goTo('pre-workouts')"
+  <a class="btn btn-ghost text-white" (click)="goTo('CREATINAS')">CREATINAS</a>
+  <a class="btn btn-ghost text-white" (click)="goTo('WHEY PROTEINS')"
+    >WHEY PROTEINS</a
+  >
+  <a class="btn btn-ghost text-white" (click)="goTo('PRÉ TREINOS')"
     >PRÉ TREINOS</a
   >
-  <a class="btn btn-ghost text-white" (click)="goTo('thermogenics')"
+  <a class="btn btn-ghost text-white" (click)="goTo('TERMOGÊNICOS')"
     >TERMOGÊNICOS</a
   >
-  <a class="btn btn-ghost text-white" (click)="goTo('hypercalorics')"
+  <a class="btn btn-ghost text-white" (click)="goTo('HIPERCALÓRICOS')"
     >HIPERCALÓRICOS</a
   >
-  <a class="btn btn-ghost text-white" (click)="goTo('stimulants')"
+  <a class="btn btn-ghost text-white" (click)="goTo('ESTIMULANTES')"
     >ESTIMULANTES</a
   >
-  <!-- <a class="btn btn-ghost text-white">BARRA DE PROTEÍNA</a>
-  <a class="btn btn-ghost text-white">PASTA DE AMEINDOIM</a>
-  <a class="btn btn-ghost text-white">BCAA</a>
-  <a class="btn btn-ghost text-white">GLUTAMINA</a>
-  <a class="btn btn-ghost text-white">CEFEÍNA</a>
+  <!-- <a class="btn btn-ghost text-white">BARRAS DE PROTEÍNA</a>
+  <a class="btn btn-ghost text-white">PASTAS DE AMEINDOIM</a>
+  <a class="btn btn-ghost text-white">BCAAS</a>
+  <a class="btn btn-ghost text-white">GLUTAMINAS</a>
+  <a class="btn btn-ghost text-white">CEFEÍNAS</a>
   <a class="btn btn-ghost text-white">COQUETELEIRAS</a>
-  <a class="btn btn-ghost text-white">SALGADINHO PROTEÍCO</a>
-  <a class="btn btn-ghost text-white">SHAKE DE WHEY PROTEIN</a>
-  <a class="btn btn-ghost text-white">ACESSORIOS</a>
+  <a class="btn btn-ghost text-white">SALGADINHOS PROTEÍCOS</a>
+  <a class="btn btn-ghost text-white">SHAKES DE WHEY PROTEIN</a>
+  <a class="btn btn-ghost text-white">ACESSÓRIOS</a>
   <a class="btn btn-ghost text-white">IMPORTADOS</a> -->
 </div>
 <div class="flex items-center flex-col mx-10 gap-10">
@@ -77,23 +79,23 @@
     </p>
     }
   </div>
-  } @else {
-  <h1 class="text-3xl" id="pre-workouts">PRÉ TREINOS</h1>
+  } @else { @for (item of perCategory; track $index) {
+  <h1 class="text-3xl" [id]="item.categoria">{{ item.categoria }}</h1>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl gap-6">
-    @for (preWorkout of preWorkouts; track $index) {
+    @for (product of item.produtos; track $index) {
     <div class="card bg-base-100 w-full shadow-xl">
       <figure style="background-image: url('../assets/logo-neutral.png')">
-        <img [src]="preWorkout.img" [alt]="preWorkout.name" class="h-40 my-6" />
+        <img [src]="product.img" [alt]="product.name" class="h-40 my-6" />
       </figure>
       <div class="card-body">
-        <h2 class="card-title">{{ preWorkout.name }}</h2>
-        <p>{{ getFormattedPrice(preWorkout.price) }}</p>
+        <h2 class="card-title">{{ product.name }}</h2>
+        <p>{{ getFormattedPrice(product.price) }}</p>
         <div class="card-actions justify-end">
           <a
             href="https://wa.me/+553798259633/?text=urlencodedtex"
             [attr.href]="
               'https://wa.me/+553798259633/?text=Olá! Gostaria de saber mais sobre o produto ' +
-              preWorkout.name
+              product.name
             "
           >
             <button class="btn btn-secondary text-white">COMPRAR</button>
@@ -103,59 +105,5 @@
     </div>
     }
   </div>
-  <h1 class="text-3xl" id="thermogenics">TERMOGÊNICOS</h1>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl gap-6">
-    @for (thermogenic of thermogenics; track $index) {
-    <div class="card bg-base-100 w-full shadow-xl">
-      <figure style="background-image: url('../assets/logo-neutral.png')">
-        <img
-          [src]="thermogenic.img"
-          [alt]="thermogenic.name"
-          class="h-40 my-6"
-        />
-      </figure>
-      <div class="card-body">
-        <h2 class="card-title">{{ thermogenic.name }}</h2>
-        <p>{{ getFormattedPrice(thermogenic.price) }}</p>
-        <div class="card-actions justify-end">
-          <a
-            href="https://wa.me/+553798259633/?text=urlencodedtex"
-            [attr.href]="
-              'https://wa.me/+553798259633/?text=Olá! Gostaria de saber mais sobre o produto ' +
-              thermogenic.name
-            "
-          >
-            <button class="btn btn-secondary text-white">COMPRAR</button>
-          </a>
-        </div>
-      </div>
-    </div>
-    }
-  </div>
-  <h1 class="text-3xl" id="creatines">CREATINAS</h1>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl gap-6">
-    @for (creatine of creatines; track $index) {
-    <div class="card bg-base-100 w-full shadow-xl">
-      <figure style="background-image: url('../assets/logo-neutral.png')">
-        <img [src]="creatine.img" [alt]="creatine.name" class="h-40 my-6" />
-      </figure>
-      <div class="card-body">
-        <h2 class="card-title">{{ creatine.name }}</h2>
-        <p>{{ getFormattedPrice(creatine.price) }}</p>
-        <div class="card-actions justify-end">
-          <a
-            href="https://wa.me/+553798259633/?text=urlencodedtex"
-            [attr.href]="
-              'https://wa.me/+553798259633/?text=Olá! Gostaria de saber mais sobre o produto ' +
-              creatine.name
-            "
-          >
-            <button class="btn btn-secondary text-white">COMPRAR</button>
-          </a>
-        </div>
-      </div>
-    </div>
-    }
-  </div>
-  }
+  } }
 </div>
